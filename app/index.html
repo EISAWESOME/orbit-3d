@@ -29,7 +29,7 @@
 	</head>
 
 	<body>
-        <div id="info"></div>
+        <div id="loading"></div>
 		<script src="../build/three.min.js"></script>
 		<script src="js/controls/TrackballControls.js"></script>
 		<script src="js/loaders/DDSLoader.js"></script>
@@ -107,6 +107,8 @@
 					if ( xhr.lengthComputable ) {
 						var percentComplete = xhr.loaded / xhr.total * 100;
 						console.log( Math.round(percentComplete, 2) + '% downloaded' );
+						var loading = document.querySelector("#loading");
+						loading.innerHTML = Math.round(percentComplete, 2) + '% downloaded';
 					}
 				};
 
@@ -125,7 +127,7 @@
                         var objLoader = new THREE.OBJLoader();
                         objLoader.setMaterials( materials );
                         objLoader.setPath( 'obj/' );
-                        objLoader.load( model+'.obj', function ( object ) {
+                        objLoader.load(model+'.obj', function ( object ) {
                             console.log('Model Loaded !');
                             scene.add( object );
                         }, onProgress, onError );
